@@ -52,13 +52,13 @@ abstract class ActionScheduler_TimezoneHelper {
 		}
 
 		// Get UTC offset, if it isn't set then return UTC.
-		$utc_offset = intval( get_option( 'gmt_offset', 0 ) );
-		if ( 0 === $utc_offset ) {
+		$utc_offset = get_option( 'gmt_offset', 0 );
+		if ( ! is_numeric( $utc_offset ) || 0 === $utc_offset ) {
 			return 'UTC';
 		}
 
 		// Adjust UTC offset from hours to seconds.
-		$utc_offset *= 3600;
+		$utc_offset = (int) ( $utc_offset * 3600 );
 
 		// Attempt to guess the timezone string from the UTC offset.
 		$timezone = timezone_name_from_abbr( '', $utc_offset );
