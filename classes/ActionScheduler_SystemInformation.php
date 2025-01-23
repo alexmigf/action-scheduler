@@ -80,6 +80,10 @@ class ActionScheduler_SystemInformation {
 	/**
 	 * Get registered sources.
 	 *
+	 * It is not always possible to obtain this information. For instance, if earlier versions (<=3.9.0) of
+	 * Action Scheduler register themselves first, then the necessary data about registered sources will
+	 * not be available.
+	 *
 	 * @return array<string, string>
 	 */
 	public static function get_sources() {
