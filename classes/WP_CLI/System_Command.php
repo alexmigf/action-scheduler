@@ -5,6 +5,7 @@ namespace Action_Scheduler\WP_CLI;
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaping output is not necessary in WP CLI.
 
 use ActionScheduler_SystemInformation;
+use WP_CLI;
 use function \WP_CLI\Utils\get_flag_value;
 
 /**
@@ -161,7 +162,13 @@ class System_Command {
 		}
 
 		$sources = ActionScheduler_SystemInformation::get_sources();
-		$rows    = array();
+
+		if ( empty( $sources ) ) {
+			WP_CLI::log( __( 'Detailed information about registered sources is not currently available.', 'action-scheduler' ) );
+			return;
+		}
+
+		$rows = array();
 
 		foreach ( $sources as $check_source => $version ) {
 			$active = dirname( $check_source ) === $source;
