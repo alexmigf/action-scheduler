@@ -4,6 +4,7 @@ namespace Action_Scheduler\WP_CLI;
 
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaping output is not necessary in WP CLI.
 
+use ActionScheduler_SystemInformation;
 use function \WP_CLI\Utils\get_flag_value;
 
 /**
@@ -99,7 +100,7 @@ class System_Command {
 	 */
 	public function version( array $args, array $assoc_args ) {
 		$all    = (bool) get_flag_value( $assoc_args, 'all' );
-		$latest = $this->get_latest_version( $instance );
+		$latest = $this->get_latest_version();
 
 		if ( ! $all ) {
 			echo $latest;
@@ -139,7 +140,7 @@ class System_Command {
 	 *
 	 * @param array $args       Positional args.
 	 * @param array $assoc_args Keyed args.
-	 * @uses \ActionScheduler_Versions::get_sources()
+	 * @uses ActionScheduler_SystemInformation::active_source_path()
 	 * @uses \WP_CLI\Formatter::display_items()
 	 * @uses $this->get_latest_version()
 	 * @return void
@@ -147,8 +148,7 @@ class System_Command {
 	public function source( array $args, array $assoc_args ) {
 		$all      = (bool) get_flag_value( $assoc_args, 'all' );
 		$fullpath = (bool) get_flag_value( $assoc_args, 'fullpath' );
-		$versions = \ActionScheduler_Versions::instance();
-		$source   = $versions->active_source_path();
+		$source   = ActionScheduler_SystemInformation::active_source_path();
 		$path     = $source;
 
 		if ( ! $fullpath ) {
@@ -160,7 +160,7 @@ class System_Command {
 			\WP_CLI::halt( 0 );
 		}
 
-		$sources = $versions->get_sources();
+		$sources = ActionScheduler_SystemInformation::get_sources();
 		$rows    = array();
 
 		foreach ( $sources as $check_source => $version ) {
