@@ -128,7 +128,7 @@ class ActionScheduler_Versions {
 	 *         'name' => 'Name',
 	 *     ]
 	 *
-	 * @deprecated 3.9.1 Use ActionScheduler_SystemInformation::active_source().
+	 * @deprecated 3.9.2 Use ActionScheduler_SystemInformation::active_source().
 	 *
 	 * @return array
 	 */
