@@ -133,7 +133,7 @@ class ActionScheduler_Versions {
 	 * @return array
 	 */
 	public function active_source(): array {
-		_deprecated_function( __METHOD__, '3.9.1', 'ActionScheduler_SystemInformation::active_source()' );
+		_deprecated_function( __METHOD__, '3.9.2', 'ActionScheduler_SystemInformation::active_source()' );
 		return ActionScheduler_SystemInformation::active_source();
 	}
 
