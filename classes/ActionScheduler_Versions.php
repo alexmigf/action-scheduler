@@ -145,7 +145,7 @@ class ActionScheduler_Versions {
 	 * @return string
 	 */
 	public function active_source_path(): string {
-		_deprecated_function( __METHOD__, '3.9.1', 'ActionScheduler_SystemInformation::active_source_path()' );
+		_deprecated_function( __METHOD__, '3.9.2', 'ActionScheduler_SystemInformation::active_source_path()' );
 		return ActionScheduler_SystemInformation::active_source_path();
 	}
 }
